@@ -6,7 +6,7 @@ import * as random from 'maath/random/dist/maath-random.cjs'
 
 const StarBackground = (props) => {
     const ref = useRef();
-    const [sphere] = useState(() => random.inSphere(new Float32Array(5000), { radius: 1.2 }))
+    const [sphere] = useState(() => random.inSphere(new Float32Array(5000 * 3), { radius: 1.2 }))
 
     useFrame((state, delta) => {
         ref.current.rotation.x -= delta / 10;
