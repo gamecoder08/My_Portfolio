@@ -31,8 +31,8 @@ const AboutMe = () => {
                 >
                     <Slider>
                         <div className="text-white">
-                            <label className="font-semibold pl-5">Description</label>
-                            <div className="p-5">
+                            <label className="block font-semibold pl-5 pb-2 border-b md:w-[760px]">About Me</label>
+                            <div className="p-5 max-h-[500px] overflow-y-scroll">
                                 <p>
                                     Hi, I’m <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-cyan-500 font-semibold">Utkarsh Raj Sinha</span>, a passionate and adaptive <span className="text-cyan-400">Software Engineer</span> with a strong foundation in computer science and hands-on experience across AI, full-stack development, and modern cloud technologies.
                                 </p>

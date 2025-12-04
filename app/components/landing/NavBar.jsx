@@ -41,20 +41,20 @@ const NavBar = () => {
                         }}
                     />
 
-                    <span className='font-bold ml-2.5 hidden md:block text-gray-300 cursor-pointer hover:bg-gradient-to-r hover:from-purple-500 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent'>
+                    <span className='font-bold ml-2.5 hidden md:block text-gray-300 cursor-pointer hover:bg-linear-to-r hover:from-purple-500 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent'>
                         Portfolio
                     </span>
                 </a>
 
                 <div className='w-full md:w-[500px] h-full flex flex-row items-center justify-between md:mr-20'>
                     <div className='flex justify-between items-center w-full h-auto border border-[#7042f861] bg-[#0300145e] mr-[15px] px-5 py-2.5 rounded-full text-gray-200'>
-                        <a href='#about-me' className='cursor-pointer hover:bg-gradient-to-r hover:from-purple-500 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent'>
+                        <a href='#about-me' className='cursor-pointer hover:bg-linear-to-r hover:from-purple-500 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent'>
                             About Me
                         </a>
-                        <a href='#skills' className='cursor-pointer hover:bg-gradient-to-r hover:from-purple-500 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent'>
+                        <a href='#skills' className='cursor-pointer hover:bg-linear-to-r hover:from-purple-500 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent'>
                             Skills
                         </a>
-                        <a href='#projects' className='cursor-pointer hover:bg-gradient-to-r hover:from-purple-500 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent'>
+                        <a href='#projects' className='cursor-pointer hover:bg-linear-to-r hover:from-purple-500 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent'>
                             Projects
                         </a>
                         {/* <a href='#work-history' className='cursor-pointer'>

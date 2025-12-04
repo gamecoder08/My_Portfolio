@@ -41,7 +41,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className='mb-5 text-[15px] text-center'>
-                    &copy; 2025 GameCoder. All rights reserved.
+                    Thank you for visiting my portfolio website! &nbsp;|&nbsp; Built by Me © 2025
                 </div>
             </div>
         </div>
