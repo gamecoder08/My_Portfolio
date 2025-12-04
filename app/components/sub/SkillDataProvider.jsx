@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 
-const SkillDataProvider = ({ src, width, height, index }) => {
+const SkillDataProvider = ({ src, width, height, index, title }) => {
     const { ref, inView } = useInView({
         triggerOnce: true,
     });
@@ -29,7 +29,9 @@ const SkillDataProvider = ({ src, width, height, index }) => {
                 src={src}
                 width={width}
                 height={height}
+                title={title}
                 alt="Skill Icon"
+                className='z-90'
             />
 
         </motion.div>
