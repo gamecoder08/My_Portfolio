@@ -1,11 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from 'framer-motion';
 import Image from "next/image";
 import { slideInFromLeft, slideInFromRight } from "public/utils/motion";
 import Slider from "../common/Slider/Slider";
+import GitHubWidget from "../sub/GitHubWidget";
 
 const AboutMe = () => {
+    const [autoPlay, setAutoPlay] = useState(false);
     return (
         <section
             id="about-me"
@@ -29,7 +31,16 @@ const AboutMe = () => {
                     className="flex flex-col text-justify text-white gap-5 max-w-[800px]"
                     variants={slideInFromRight(0.7)}
                 >
-                    <Slider>
+
+
+                    <label className="inline-flex items-center justify-end cursor-pointer z-90">
+                        <input type="checkbox" value={autoPlay} onClick={() => setAutoPlay(!autoPlay)} className="sr-only peer" />
+                            <div className="relative w-9 h-5 bg-neutral-quaternary peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brand-soft dark:peer-focus:ring-brand-soft rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand"></div>
+                            <span className="select-none ms-3 text-sm font-medium text-heading">Autoplay</span>
+                    </label>
+
+
+                    <Slider loop={autoPlay} autoPlay={autoPlay}>
                         <div className="text-white">
                             <label className="block font-semibold pl-5 pb-2 border-b md:w-[760px]">About Me</label>
                             <div className="p-5 max-h-[500px] overflow-y-scroll">
@@ -56,8 +67,7 @@ const AboutMe = () => {
                         </div>
 
                         <div className="text-white">
-                            <label className="font-semibold">Notes</label>
-                            <textarea className="w-full border rounded p-2"></textarea>
+                            <GitHubWidget />
                         </div>
 
                         <div className="text-white">

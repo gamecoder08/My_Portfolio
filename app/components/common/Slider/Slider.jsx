@@ -1,26 +1,79 @@
 "use client";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useDragControls } from "framer-motion";
 import React from "react";
 
-export default function Slider({ children }) {
+export default function Slider({
+    children,
+    showDots = false,
+    autoPlay = false,
+    autoPlayInterval = 3000,
+    loop = true,
+}) {
     const childrenArray = React.Children.toArray(children);
+    const total = childrenArray.length;
     const [index, setIndex] = useState(0);
 
-    const next = () => {
-        if (index < childrenArray.length - 1) setIndex(index + 1);
+    const controls = useDragControls();
+    const containerRef = useRef(null);
+
+    const next = () =>
+        setIndex((prev) => (loop ? (prev + 1) % total : Math.min(prev + 1, total - 1)));
+
+    const prev = () =>
+        setIndex((prev) => (loop ? (prev - 1 + total) % total : Math.max(prev - 1, 0)));
+
+    useEffect(() => {
+        const handleKey = (e) => {
+            if (e.key === "ArrowRight") next();
+            if (e.key === "ArrowLeft") prev();
+        };
+
+        window.addEventListener("keydown", handleKey);
+        return () => window.removeEventListener("keydown", handleKey);
+    }, [loop]);
+
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const handleWheel = (e) => {
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                if (e.deltaX > 0) next();
+                else prev();
+            }
+        };
+
+        container.addEventListener("wheel", handleWheel, { passive: true });
+        return () => container.removeEventListener("wheel", handleWheel);
+    }, [loop]);
+
+    useEffect(() => {
+        if (!autoPlay) return;
+
+        const interval = setInterval(next, autoPlayInterval);
+        return () => clearInterval(interval);
+    }, [autoPlay, autoPlayInterval, loop]);
+
+    const handleDragEnd = (event, info) => {
+        if (info.offset.x < -50) next();
+        else if (info.offset.x > 50) prev();
     };
 
-    const prev = () => {
-        if (index > 0) setIndex(index - 1);
-    };
+    const hidePrev = !loop && index === 0;
+    const hideNext = !loop && index === total - 1;
 
     return (
-        <div className="relative w-full z-90 overflow-hidden">
+        <div ref={containerRef} className="relative w-full z-90 overflow-hidden select-none">
+
             <motion.div
                 className="flex"
                 animate={{ x: `-${index * 100}%` }}
                 transition={{ duration: 0.4 }}
+                drag="x"
+                dragControls={controls}
+                dragConstraints={{ left: 0, right: 0 }}
+                onDragEnd={handleDragEnd}
             >
                 {childrenArray.map((child, i) => (
                     <div key={i} className="w-full shrink-0 px-4">
@@ -31,11 +84,10 @@ export default function Slider({ children }) {
 
             <button
                 onClick={prev}
-                disabled={index === 0}
                 className={`
                     absolute top-1/2 -left-2 -translate-y-1/2 p-2 rounded-full
                     transition-opacity duration-300
-                    ${index === 0 ? "opacity-0 pointer-events-none" : "opacity-100"}
+                    ${hidePrev ? "opacity-0 pointer-events-none" : "opacity-100"}
                 `}
             >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -45,17 +97,30 @@ export default function Slider({ children }) {
 
             <button
                 onClick={next}
-                disabled={index === childrenArray.length - 1}
                 className={`
                     absolute top-1/2 -right-2 -translate-y-1/2 p-2 rounded-full
                     transition-opacity duration-300
-                    ${index === childrenArray.length - 1 ? "opacity-0 pointer-events-none" : "opacity-100"}
+                    ${hideNext ? "opacity-0 pointer-events-none" : "opacity-100"}
                 `}
             >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
             </button>
+
+            {showDots && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                    {childrenArray.map((_, i) => (
+                        <button
+                            key={i}
+                            onClick={() => setIndex(i)}
+                            className={`w-3 h-3 rounded-full transition-all ${
+                                i === index ? "bg-black scale-110" : "bg-gray-400 opacity-50"
+                            }`}
+                        ></button>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
