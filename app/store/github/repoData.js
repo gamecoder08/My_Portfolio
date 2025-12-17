@@ -1,19 +1,31 @@
 import { persistentAtom } from "@nanostores/persistent";
 
 const EMPTY_REPOS = {};
+const CACHE_KEY = "githubRepos";
+const EXPIRATION_MS = 24 * 60 * 60 * 1000;
+
+const wrapData = (data) => ({
+    timestamp: Date.now(),
+    value: data,
+});
+
+const unwrapRepos = (stored) => {
+    try {
+        const parsed = JSON.parse(stored);
+        if (!parsed || !parsed.timestamp || !parsed.value) return EMPTY_REPOS;
+        if (Date.now() - parsed.timestamp > EXPIRATION_MS) return EMPTY_REPOS;
+        return parsed.value;
+    } catch {
+        return EMPTY_REPOS;
+    }
+};
 
 export const githubRepoStore = persistentAtom(
-    "githubRepos",
+    CACHE_KEY,
     EMPTY_REPOS,
     {
-        encode: JSON.stringify,
-        decode: (value) => {
-            try {
-                return JSON.parse(value);
-            } catch {
-                return EMPTY_REPOS;
-            }
-        },
+        encode: (value) => JSON.stringify(wrapData(value)),
+        decode: unwrapRepos,
     }
 );
 
@@ -33,7 +45,7 @@ const fetchGitHubRepos = async () => {
 
 if (typeof window !== "undefined") {
     const current = githubRepoStore.get();
-    if (!Array.isArray(current) || current.length === 0) {
+    if (!current || Object.keys(current).length === 0) {
         fetchGitHubRepos();
     }
 }

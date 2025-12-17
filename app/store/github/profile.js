@@ -1,19 +1,31 @@
 import { persistentAtom } from "@nanostores/persistent";
 
 const EMPTY_PROFILE = {};
+const CACHE_KEY = "githubProfile";
+const EXPIRATION_MS = 24 * 60 * 60 * 1000;
+
+const wrapData = (data) => ({
+    timestamp: Date.now(),
+    value: data,
+});
+
+const unwrapData = (stored) => {
+    try {
+        const parsed = JSON.parse(stored);
+        if (!parsed || !parsed.timestamp || !parsed.value) return EMPTY_PROFILE;
+        if (Date.now() - parsed.timestamp > EXPIRATION_MS) return EMPTY_PROFILE;
+        return parsed.value;
+    } catch {
+        return EMPTY_PROFILE;
+    }
+};
 
 export const githubProfileStore = persistentAtom(
-    "githubProfile",
+    CACHE_KEY,
     EMPTY_PROFILE,
     {
-        encode: JSON.stringify,
-        decode: (value) => {
-            try {
-                return JSON.parse(value);
-            } catch {
-                return EMPTY_PROFILE;
-            }
-        },
+        encode: (value) => JSON.stringify(wrapData(value)),
+        decode: unwrapData,
     }
 );
 
@@ -30,7 +42,6 @@ const fetchGitHubProfile = async () => {
     }
 };
 
-// Fetch only once (if empty)
 if (typeof window !== "undefined") {
     const current = githubProfileStore.get();
     if (!current || !current.login) {
