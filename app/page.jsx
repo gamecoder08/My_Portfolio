@@ -1,4 +1,4 @@
-import Image from "next/image";
+"use client";
 import Hero from "./components/landing/Hero";
 import Skills from "./components/landing/Skills";
 import Projects from "./components/landing/Projects";
