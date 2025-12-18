@@ -85,7 +85,7 @@ export default function Slider({
             <button
                 onClick={prev}
                 className={`
-                    absolute top-1/2 -left-2 -translate-y-1/2 p-2 rounded-full
+                    absolute top-1/2 -left-4 -translate-y-1/2 p-2 rounded-full
                     transition-opacity duration-300
                     ${hidePrev ? "opacity-0 pointer-events-none" : "opacity-100"}
                 `}
@@ -98,7 +98,7 @@ export default function Slider({
             <button
                 onClick={next}
                 className={`
-                    absolute top-1/2 -right-2 -translate-y-1/2 p-2 rounded-full
+                    absolute top-1/2 -right-4 -translate-y-1/2 p-2 rounded-full
                     transition-opacity duration-300
                     ${hideNext ? "opacity-0 pointer-events-none" : "opacity-100"}
                 `}

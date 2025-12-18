@@ -1,7 +1,5 @@
 import React from 'react'
-import { FaYoutube } from 'react-icons/fa';
 import {
-    RxDiscordLogo,
     RxGithubLogo,
     RxLinkedinLogo,
 } from 'react-icons/rx';
@@ -12,31 +10,25 @@ const Footer = () => {
             <div className='w-full h-full flex flex-col items-center justify-center m-auto'>
                 <div className='w-full h-full flex flex-row items-center justify-around flex-wrap'>
 
-                    <div className='min-w-[200px] h-auto flex flex-col items-center justify-start'>
+                    <div className='min-w-[200px] h-auto flex flex-col items-center justify-start z-90'>
                         <div className='font-bold text-[16px]'>Community</div>
                         <p className='flex flex-row items-center my-[15px] cursor-pointer'>
-                            <FaYoutube />
-                            <span className='text-[15px] ml-1.5'>YouTube</span>
-                        </p>
-                        <p className='flex flex-row items-center my-[15px] cursor-pointer'>
                             <RxGithubLogo />
-                            <span className='text-[15px] ml-1.5'>GitHub</span>
+                            <a href="https://www.github.com/gamecoder08" target='noopener' className='text-[15px] ml-1.5 hover:underline'>GitHub</a>
                         </p>
                         <p className='flex flex-row items-center my-[15px] cursor-pointer'>
+                            <RxLinkedinLogo />
+                            <a href="https://www.linkedin.com/in/utkarsh-raj-sinha/" target='noopener' className='text-[15px] ml-1.5 hover:underline'>LinkedIn</a>
+                        </p>
+                        {/* <p className='flex flex-row items-center my-[15px] cursor-pointer'>
                             <RxDiscordLogo />
                             <span className='text-[15px] ml-1.5'>Discord</span>
-                        </p>
+                        </p> */}
                     </div>
-                    <div className='min-w-[200px] h-auto flex flex-col items-center justify-start'>
-                        <div className='font-bold text-[16px]'>About</div>
+                    <div className='min-w-[200px] h-auto flex flex-col items-center justify-start z-90'>
+                        <div className='font-bold text-[16px]'>Contact Me</div>
                         <p className='flex flex-row items-center my-[15px] cursor-pointer'>
-                            <span className='text-[15px] ml-1.5'>Become Sponsor</span>
-                        </p>
-                        <p className='flex flex-row items-center my-[15px] cursor-pointer'>
-                            <span className='text-[15px] ml-1.5'>Learning About Me</span>
-                        </p>
-                        <p className='flex flex-row items-center my-[15px] cursor-pointer'>
-                            <span className='text-[15px] ml-1.5'>gamecoder0811@gmail.com</span>
+                            <span className='text-[15px] ml-1.5 hover:underline'><a href="mailto:gamecoder0811@gmail.com">gamecoder0811@gmail.com</a></span>
                         </p>
                     </div>
                 </div>

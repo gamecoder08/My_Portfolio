@@ -1,20 +1,20 @@
 import Image from 'next/image'
 import React from 'react'
 
-const ProjectCard = ({ src, title, description }) => {
+const ProjectCard = ({ data, openPop }) => {
     return (
-        <div className='relative overflow-hidden rounded-lg shadow-lg border border-[#2A0E61]'>
+        <div onClick={() => openPop(data)} className='relative overflow-hidden rounded-lg z-90 shadow-lg h-[400px] max-w-[500px] border border-[#2A0E61]'>
             <Image
-                src={src}
-                alt={title}
+                src={data?.imageSrc[0]}
+                alt={data?.title}
                 width={1000}
                 height={1000}
-                className='w-full object-contain'
+                className='w-full max-h-[235px] object-contain'
             />
 
             <div className='relative p-4'>
-                <h1 className='text=2xl font-semibold text-white'>{title}</h1>
-                <p className='mt-2 text-gray-300'>{description}</p>
+                <h1 className='text-xl font-semibold text-white'>{data?.title}</h1>
+                <p className='mt-2 text-gray-300 line-clamp-3'>{data?.description}</p>
             </div>
         </div>
     )

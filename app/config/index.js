@@ -91,10 +91,10 @@ export const Socials = [
         src: "/images/linkedinwhite.png",
         link: "https://www.linkedin.com/in/utkarsh-raj-sinha/"
     },
-    {
-        name: "Instagram",
-        src: "/images/discord.svg",
-    },
+    // {
+    //     name: "Instagram",
+    //     src: "/images/discord.svg",
+    // },
 ];
 
 
@@ -341,3 +341,24 @@ export const Services = [
         height: 70,
     },
 ];
+
+export const projectData = [
+    {
+        imageSrc: ["/images/projects/stockpredictor/mainSite.png", "/images/projects/stockpredictor/metrics.png",],
+        title: "Stock Ticker Predictor",
+        description: "'Stock Ticker Predictor' project basically aims to provide a visual representation and analysis of data related to time-series data which is constantly changing. This provides a dashboard to user, made using reactJs - tailwindCSS, displaying current trends and stocks data which uses \"LSTM\" + \"XGBoost\" model. ",
+        link: "https://github.com/gamecoder08/StockPredictor",
+    },
+    {
+        imageSrc: ["/images/projects/SatXtract/mainSite.jpg", "/images/projects/SatXtract/uhiPage.jpg", "/images/projects/SatXtract/segPage.jpg", "/images/projects/SatXtract/backend.jpg", "/images/projects/SatXtract/metric1.jpg", "/images/projects/SatXtract/metric2.jpg", "/images/projects/SatXtract/metric3.jpg", "/images/projects/SatXtract/metric4.jpg", "/images/projects/SatXtract/modelFlow.jpg"],
+        title: "SatXtract",
+        description: "'SatXtract' project is a project to harness the power of U-Net and advanced interpolation techniques to segment satellite images and classify surface objects. Highly useful in learning reasoning behind various UHI indices such as LSE, LST and NDVI.",
+        link: "https://github.com/gamecoder08/SatXtract-Website",
+    },
+    {
+        imageSrc: ["/images/projects/portfolio/mainSite.png"],
+        title: "My Portfolio Website",
+        description: "A portfolio website to showcase my skills and projects built using Next js, ThreeJs, Tailwind CSS and Framer Motion for animations.",
+        link: "https://github.com/gamecoder08/My_Portfolio"
+    }
+]
