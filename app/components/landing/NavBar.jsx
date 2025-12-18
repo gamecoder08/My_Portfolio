@@ -1,7 +1,7 @@
 "use client";
 import Image from 'next/image';
 import React, { useRef, useState } from 'react'
-import { Socials } from '../constants';
+import { Socials } from '../../config';
 
 const NavBar = () => {
     const [rotation, setRotation] = useState(0);

@@ -224,7 +224,7 @@ export const Dev_skill = [
         height: 80,
     },
     {
-        skill_name: "TensorFlow",
+        skill_name: "SciKit Learn",
         Image: "/images/scikit.png",
         width: 110,
         height: 110,

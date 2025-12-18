@@ -90,7 +90,7 @@ export default function Slider({
                     ${hidePrev ? "opacity-0 pointer-events-none" : "opacity-100"}
                 `}
             >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
                     <path d="M16 5l-7 7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
             </button>
@@ -103,7 +103,7 @@ export default function Slider({
                     ${hideNext ? "opacity-0 pointer-events-none" : "opacity-100"}
                 `}
             >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
                     <path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
             </button>

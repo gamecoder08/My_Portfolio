@@ -1,7 +1,7 @@
 export async function GET() {
-    const username = "gamecoder08";
+  const username = "gamecoder08";
 
-    const query = `
+  const query = `
     query ($login: String!) {
       user(login: $login) {
         repositories(
@@ -20,30 +20,50 @@ export async function GET() {
               name
               color
             }
+            languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+              edges {
+                size
+                node {
+                  name
+                  color
+                }
+              }
+            }
             updatedAt
+
+            defaultBranchRef {
+              name
+              target {
+                ... on Commit {
+                  history {
+                    totalCount
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
-  `;
+    `;
 
-    const res = await fetch("https://api.github.com/graphql", {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            query,
-            variables: { login: username },
-        }),
-        next: { revalidate: 300 },
-    });
+  const res = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query,
+      variables: { login: username },
+    }),
+    next: { revalidate: 300 },
+  });
 
-    if (!res.ok) {
-        return Response.json({ error: "Failed to fetch repos" }, { status: 500 });
-    }
+  if (!res.ok) {
+    return Response.json({ error: "Failed to fetch repos" }, { status: 500 });
+  }
 
-    const json = await res.json();
-    return Response.json(json.data.user.repositories.nodes);
+  const json = await res.json();
+  return Response.json(json.data.user.repositories.nodes);
 }
