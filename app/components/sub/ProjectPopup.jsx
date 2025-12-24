@@ -10,7 +10,7 @@ const ProjectPopup = ({ closePopup, popUpRef, project }) => {
         <div className="fixed inset-0 bg-black/20 text-white flex items-center justify-center z-100">
             <div
                 ref={popUpRef}
-                className={`bg-[#05051fb1]/20 backdrop-blur-md rounded-lg p-10 md:p-5 w-full max-w-[90%] md:max-w-[1000px] md:max-h-[800px] overflow-scroll transition-all duration-200 ease-in-out `}
+                className={`bg-[#05051fb1]/20 backdrop-blur-md border border-[#2A0E61] shadow-lg shadow-[#2A0E61]/50 rounded-lg p-10 md:p-5 w-full max-w-[90%] md:max-w-[1000px] md:max-h-[800px] overflow-scroll transition-all duration-200 ease-in-out `}
             >
                 <div className="flex justify-between items-center mb-2 md:mb-5">
                     <h3 className="text-[18px] font-semibold">Project Details</h3>

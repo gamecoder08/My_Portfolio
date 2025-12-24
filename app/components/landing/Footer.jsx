@@ -28,6 +28,9 @@ const Footer = () => {
                     <div className='min-w-[200px] h-auto flex flex-col items-center justify-start z-90'>
                         <div className='font-bold text-[16px]'>Contact Me</div>
                         <p className='flex flex-row items-center my-[15px] cursor-pointer'>
+                            <span className='text-[15px] ml-1.5 hover:underline'><a href="mailto:sinharajutkarsh@gmail.com">sinharajutkarsh@gmail.com</a></span>
+                        </p>
+                        <p className='flex flex-row items-center my-[15px] cursor-pointer'>
                             <span className='text-[15px] ml-1.5 hover:underline'><a href="mailto:gamecoder0811@gmail.com">gamecoder0811@gmail.com</a></span>
                         </p>
                     </div>
