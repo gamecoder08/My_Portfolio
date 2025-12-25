@@ -8,7 +8,7 @@ const StarBackground = (props) => {
     const ref = useRef();
 
     const [sphere] = useState(() =>
-        random.inSphere(new Float32Array(5000 * 3), { radius: 1.2 })
+        random.inSphere(new Float32Array((props.isMobile ? 3000 : 5000) * 3), { radius: 1.2 })
     );
 
     const baseXSpeed = 1 / 10;
@@ -59,12 +59,12 @@ const StarBackground = (props) => {
     );
 };
 
-const StarCanvas = () => {
+const StarCanvas = ({ isMobile }) => {
     return (
         <div className='w-full h-auto fixed inset-0 z-20'>
             <Canvas camera={{ position: [0, 0, 1] }}>
                 <Suspense fallback={null}>
-                    <StarBackground />
+                    <StarBackground isMobile={isMobile} />
                 </Suspense>
             </Canvas>
         </div>

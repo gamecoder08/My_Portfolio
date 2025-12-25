@@ -9,7 +9,7 @@ import GitHubWidget from "../sub/GitHubWidget";
 const AboutMe = () => {
     const [autoPlay, setAutoPlay] = useState(false);
     return (
-        <section id="about-me" className="flex flex-col items-center py-10">
+        <section id="about-me" className="flex flex-col items-center py-5 md:py-10">
             <h1 className="text-[40px] font-semibold text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-cyan-500 pt-10 pb-5">
                 This is Me
             </h1>
@@ -25,17 +25,18 @@ const AboutMe = () => {
                     <Image
                         src="/images/me.png"
                         alt="This is Me"
+                        layout="responsive"
                         width={500}
                         height={500}
-                        className="rounded-3xl w-full max-w-[300px] md:max-w-[600px] object-cover"
+                        className="rounded-3xl w-full max-w-[200px] md:max-w-[600px] object-cover"
                     />
                 </motion.div>
 
                 <motion.div
-                    className="flex flex-col text-justify text-white gap-5 max-w-[800px]"
+                    className="flex flex-col text-justify text-white gap-5 max-w-[320px] md:max-w-[800px]"
                     variants={slideInFromRight(0.7)}
                 >
-                    <label className="inline-flex items-center justify-end cursor-pointer z-90">
+                    <label className="inline-flex items-center justify-end cursor-pointer z-40">
                         <input
                             type="checkbox"
                             checked={autoPlay}
@@ -53,7 +54,7 @@ const AboutMe = () => {
                             <label className="block font-semibold pl-5 pb-2 border-b md:w-[760px]">
                                 About Me
                             </label>
-                            <div className="p-5 max-h-[500px] overflow-y-scroll">
+                            <div className="p-5 max-h-[500px] overflow-y-scroll scrollbar-hidden">
                                 <p>
                                     Hi, I’m{" "}
                                     <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-cyan-500 font-semibold">

@@ -1,10 +1,10 @@
 import React from 'react'
 import HeroContent from '../sub/HeroContent'
 
-const Hero = () => {
+const Hero = ({isMobile}) => {
     return (
         <div className='relative flex flex-col h-full w-full'>
-            <HeroContent />
+            <HeroContent isMobile={isMobile} />
         </div>
     )
 }

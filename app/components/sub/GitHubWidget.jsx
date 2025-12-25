@@ -22,26 +22,31 @@ const RepoCard = ({ repo }) => {
             href={repo.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-100 p-4 rounded-xl bg-[#0b0b2a] border border-white/10 hover:border-cyan-400 transition"
+            className="
+                w-full
+                max-w-sm
+                p-3 sm:p-4
+                rounded-xl
+                bg-[#0b0b2a]
+                border border-white/10
+                hover:border-cyan-400
+                transition
+            "
         >
-            <h3 className="font-semibold text-white text-lg">
+            <h3 className="font-semibold text-white text-sm sm:text-lg truncate">
                 {repo.name}
             </h3>
 
-            <div className="flex flex-wrap gap-3 mt-3 text-sm text-white/80">
+            <div className="flex flex-wrap gap-3 mt-3 text-[10px] sm:text-sm text-white/80">
                 <span>⭐ {repo.stargazerCount}</span>
                 <span>🍴 {repo.forkCount}</span>
                 <span>🧾 {commitCount} commits</span>
             </div>
 
-            {/* Languages */}
             {languages.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-3 text-xs text-white/80">
+                <div className="flex flex-wrap gap-2 mt-3 text-[10px] sm:text-xs text-white/80">
                     {languages.map(lang => (
-                        <span
-                            key={lang.name}
-                            className="flex items-center gap-1"
-                        >
+                        <span key={lang.name} className="flex items-center gap-1">
                             <span
                                 className="w-2 h-2 rounded-full"
                                 style={{ backgroundColor: lang.color }}
@@ -120,47 +125,91 @@ const GitHubWidget = () => {
     if (!mounted) return null;
 
     return (
-        <div ref={ref} className='w-full h-full flex flex-col gap-5'>
+        <div ref={ref} className="w-full flex flex-col gap-8 px-2 sm:px-0">
             <div>
-                <label className="font-semibold text-white text-[22px]">GitHub Profile Stats</label>
-                <div className='flex flex-row gap-20 mt-4 items-center justify-center'>
-                    <div className='flex flex-col items-center justify-center gap-2'>
-                        <p className='text-3xl text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-cyan-500'>
+                <h2 className="font-semibold text-white text-lg sm:text-[22px]">
+                    GitHub Profile Stats
+                </h2>
+
+                <div className="
+                grid
+                grid-cols-1
+                md:grid-cols-2
+                gap-6
+                mt-6
+                items-start
+            ">
+                    <div className="flex flex-col items-center justify-center gap-2 h-full">
+                        <p className="
+                        text-4xl
+                        sm:text-5xl
+                        text-transparent
+                        bg-clip-text
+                        bg-linear-to-r
+                        from-purple-500
+                        to-cyan-500
+                    ">
                             {repoCount}
                         </p>
-                        <p>Total Repositories</p>
+                        <p className="text-sm sm:text-base text-white/80">
+                            Total Repositories
+                        </p>
                     </div>
-                    <div className="flex flex-col gap-3">
-                        <p> Top Repositories:</p>
-                        {featuredRepos.map(repo => (
-                            <RepoCard key={repo.id} repo={repo} />
+
+                    <div className="flex flex-col gap-4">
+                        <p className="text-sm sm:text-base text-white/80">
+                            Top Repositories
+                        </p>
+
+                        <div className="flex flex-col gap-4">
+                            {featuredRepos.map(repo => (
+                                <RepoCard key={repo.id} repo={repo} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 className="font-semibold text-white text-lg sm:text-[22px] mb-3">
+                    Total Contributions This Year:{" "}
+                    {contributionData?.totalContributions ?? 0}
+                </h2>
+
+                <div className="overflow-x-auto">
+                    <div className="flex gap-1 min-w-max justify-center">
+                        {contributionData?.weeks?.map((week, weekIndex) => (
+                            <div key={weekIndex} className="flex flex-col gap-1">
+                                {week.contributionDays.map((day, dayIndex) => (
+                                    <div
+                                        key={dayIndex}
+                                        title={`${day.date}: ${day.contributionCount} contributions`}
+                                        className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm"
+                                        style={{ backgroundColor: getColor(day.contributionCount) }}
+                                    />
+                                ))}
+                            </div>
                         ))}
                     </div>
                 </div>
-            </div>
 
-            <div>
-                <label className="font-semibold text-white text-[22px] mb-2">
-                    Total Contributions This Year: {contributionData?.totalContributions ?? 0}
-                </label>
-                <div className='flex flex-row justify-center gap-1 mt-2'>
-                    {contributionData?.weeks?.map((week, weekIndex) => (
-                        <div key={weekIndex} className='flex flex-col gap-1'>
-                            {week.contributionDays.map((day, dayIndex) => (
-                                <div
-                                    key={dayIndex}
-                                    title={`${day.date}: ${day.contributionCount} contributions`}
-                                    className='w-2 h-2 rounded-1'
-                                    style={{ backgroundColor: getColor(day.contributionCount) }}
-                                />
-                            ))}
-                        </div>
-                    ))}
-                </div>
-                <p className='mt-2 text-center italic text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-cyan-500'>{`"Good Habits take time"`}</p>
+                <p className="
+                mt-3
+                text-center
+                italic
+                text-sm
+                sm:text-base
+                text-transparent
+                bg-clip-text
+                bg-linear-to-r
+                from-purple-500
+                to-cyan-500
+            ">
+                    {"'Good habits take time'"}
+                </p>
             </div>
         </div>
     );
+
 };
 
 export default GitHubWidget;

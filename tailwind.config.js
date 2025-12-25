@@ -1,0 +1,16 @@
+module.exports = {
+    theme: {
+        extend: {
+            keyframes: {
+                flameOpacity: {
+                    "0%": { opacity: "0.7" },
+                    "100%": { opacity: "1" },
+                },
+            },
+            animation: {
+                flame: "flameOpacity 0.15s infinite alternate",
+            },
+        },
+    },
+    plugins: [],
+};

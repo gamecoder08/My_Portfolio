@@ -307,8 +307,6 @@ export const Softwares = [
     },
 ];
 
-
-
 export const Services = [
     {
         skill_name: "Docker",
@@ -356,7 +354,7 @@ export const projectData = [
         link: "https://github.com/gamecoder08/SatXtract-Website",
     },
     {
-        imageSrc: ["/images/projects/portfolio/mainSite.png"],
+        imageSrc: ["/images/projects/portfolio/mainSite.png", "/images/projects/portfolio/projectView.png"],
         title: "My Portfolio Website",
         description: "A portfolio website to showcase my skills and projects built using Next js, ThreeJs, Tailwind CSS and Framer Motion for animations.",
         link: "https://github.com/gamecoder08/My_Portfolio"

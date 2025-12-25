@@ -3,14 +3,14 @@ import Slider from '../common/Slider/Slider'
 import Image from 'next/image'
 import { RxGithubLogo } from 'react-icons/rx';
 
-const ProjectPopup = ({ closePopup, popUpRef, project }) => {
+const ProjectPopup = ({ closePopup, popUpRef, project, isMobile }) => {
     const [autoPlay, setAutoPlay] = useState(true);
 
     return (
         <div className="fixed inset-0 bg-black/20 text-white flex items-center justify-center z-100">
             <div
                 ref={popUpRef}
-                className={`bg-[#05051fb1]/20 backdrop-blur-md border border-[#2A0E61] shadow-lg shadow-[#2A0E61]/50 rounded-lg p-10 md:p-5 w-full max-w-[90%] md:max-w-[1000px] md:max-h-[800px] overflow-scroll transition-all duration-200 ease-in-out `}
+                className={`bg-[#05051fb1]/20 backdrop-blur-3xl md:backdrop-blur-md border border-[#2A0E61] shadow-lg shadow-[#2A0E61]/50 rounded-lg p-10 md:p-5 w-full max-w-[90%] md:max-w-[1000px] md:max-h-[800px] overflow-scroll transition-all duration-200 ease-in-out `}
             >
                 <div className="flex justify-between items-center mb-2 md:mb-5">
                     <h3 className="text-[18px] font-semibold">Project Details</h3>
@@ -23,7 +23,7 @@ const ProjectPopup = ({ closePopup, popUpRef, project }) => {
                 </div>
 
                 <div className='py-2'>
-                    <label className="flex items-end justify-end cursor-pointer mb-5 z-90">
+                    <label className="flex items-end justify-end cursor-pointer mb-5 z-80">
                         <input
                             type="checkbox"
                             checked={autoPlay}
@@ -43,11 +43,11 @@ const ProjectPopup = ({ closePopup, popUpRef, project }) => {
                 </div>
                 <div>
                     <div className='flex flex-row justify-between items-center mt-6'>
-                        <h1 className="text-2xl font-bold">{project?.title}</h1>
+                        <h1 className="text-md md:text-2xl font-bold">{project?.title}</h1>
                         <a href={project?.link} target="_blank" rel="noopener noreferrer">
-                            <div className='flex flex-row items-center gap-2'>
-                                <p className="text-blue-400 hover:text-blue-600">View in GitHub</p>
-                                <RxGithubLogo />
+                            <div className='flex flex-row items-center gap-1 md:gap-2'>
+                                {!isMobile && <p className="text-[14px] text-center text-blue-400 hover:text-blue-600">View in GitHub</p>}
+                                <RxGithubLogo className='text-xl'/>
                             </div>
                         </a>
                     </div>

@@ -1,18 +1,15 @@
 import { persistentAtom } from "@nanostores/persistent";
 
+const EMPTY_CONTRIBUTIONS = [];
+const CACHE_KEY = "githubContributions";
 const EXPIRATION_MS = 24 * 60 * 60 * 1000;
 
-const EMPTY_CONTRIBUTIONS = [];
-
-const wrapData = (data) => ({
-    timestamp: Date.now(),
-    value: data,
-});
+const wrapData = (data) => ({ timestamp: Date.now(), value: data });
 
 const unwrapContributions = (stored) => {
     try {
         const parsed = JSON.parse(stored);
-        if (!parsed || !parsed.timestamp || !parsed.value) return EMPTY_CONTRIBUTIONS;
+        if (!parsed?.timestamp || !parsed?.value) return EMPTY_CONTRIBUTIONS;
         if (Date.now() - parsed.timestamp > EXPIRATION_MS) return EMPTY_CONTRIBUTIONS;
         return parsed.value;
     } catch {
@@ -21,7 +18,7 @@ const unwrapContributions = (stored) => {
 };
 
 export const githubContributionsStore = persistentAtom(
-    "githubContributions",
+    CACHE_KEY,
     EMPTY_CONTRIBUTIONS,
     {
         encode: (value) => JSON.stringify(wrapData(value)),
@@ -33,10 +30,7 @@ const fetchGitHubContributions = async () => {
     try {
         const res = await fetch("/api/github/contributions");
         if (!res.ok) throw new Error("GitHub contributions fetch failed");
-
         const data = await res.json();
-        console.log("Fetched GitHub contributions:", data);
-
         githubContributionsStore.set(data);
     } catch (err) {
         console.error("Error fetching GitHub contributions:", err);
@@ -45,54 +39,7 @@ const fetchGitHubContributions = async () => {
 
 if (typeof window !== "undefined") {
     const current = githubContributionsStore.get();
-    if (
-        !current ||
-        typeof current.totalContributions !== "number" ||
-        !Array.isArray(current.weeks)
-    ) {
+    if (!current || !Array.isArray(current) || !current.timestamp || Date.now() - current.timestamp > EXPIRATION_MS) {
         fetchGitHubContributions();
-    }
-}
-
-const EMPTY_REPOS = [];
-
-const unwrapRepos = (stored) => {
-    try {
-        const parsed = JSON.parse(stored);
-        if (!parsed || !parsed.timestamp || !parsed.value) return EMPTY_REPOS;
-        if (Date.now() - parsed.timestamp > EXPIRATION_MS) return EMPTY_REPOS;
-        return parsed.value;
-    } catch {
-        return EMPTY_REPOS;
-    }
-};
-
-export const githubRepoStore = persistentAtom(
-    "githubRepos",
-    EMPTY_REPOS,
-    {
-        encode: (value) => JSON.stringify(wrapData(value)),
-        decode: unwrapRepos,
-    }
-);
-
-const fetchGitHubRepos = async () => {
-    try {
-        const res = await fetch("/api/github/repos");
-        if (!res.ok) throw new Error("GitHub repos fetch failed");
-
-        const data = await res.json();
-        console.log("Fetched GitHub repos:", data);
-
-        githubRepoStore.set(data);
-    } catch (err) {
-        console.error("Error fetching GitHub repos:", err);
-    }
-};
-
-if (typeof window !== "undefined") {
-    const current = githubRepoStore.get();
-    if (!current || !Array.isArray(current)) {
-        fetchGitHubRepos();
     }
 }

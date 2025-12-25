@@ -64,7 +64,7 @@ export default function Slider({
     const hideNext = !loop && index === total - 1;
 
     return (
-        <div ref={containerRef} className="relative w-full z-90 overflow-hidden select-none">
+        <div ref={containerRef} className="relative w-full z-40 overflow-hidden select-none">
 
             <motion.div
                 className="flex"
@@ -76,7 +76,7 @@ export default function Slider({
                 onDragEnd={handleDragEnd}
             >
                 {childrenArray.map((child, i) => (
-                    <div key={i} className="w-full shrink-0 px-4">
+                    <div key={i} className="w-full shrink-0 px-1 md:px-4">
                         {child}
                     </div>
                 ))}

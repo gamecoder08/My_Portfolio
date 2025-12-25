@@ -1,18 +1,13 @@
-"use client";
-import Hero from "./components/landing/Hero";
-import Skills from "./components/landing/Skills";
-import Projects from "./components/landing/Projects";
-import AboutMe from "./components/landing/AboutMe";
+import { headers } from "next/headers";
+import HomeClient from "./components/sub/HomeClient";
 
-export default function Home() {
+export default async function Home() {
+  const headersList = await headers();
+  const userAgent = headersList.get("user-agent") || "";
+  const isMobile = /Mobi|Android|iPhone/i.test(userAgent);
   return (
     <main className="h-full w-full">
-      <div className="flex flex-col gap-20">
-        <Hero />
-        <AboutMe />
-        <Skills />
-        <Projects />
-      </div>
+      <HomeClient isMobile={isMobile} />
     </main>
   );
 }
