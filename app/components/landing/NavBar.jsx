@@ -114,7 +114,7 @@ const NavBar = ({ isMobile }) => {
                     </div>
                 )}
 
-                <div className="">
+                <div className="flex items-center justify-center border border-[#7042f861] bg-[#0300145e] px-2 sm:px-5 py-2.5 rounded-full text-gray-200 gap-2 sm:gap-4">
                     <a href="#about-me" className="flex-1 text-center cursor-pointer hover:bg-linear-to-r hover:from-purple-500 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent whitespace-nowrap">
                         About Me
                     </a>
