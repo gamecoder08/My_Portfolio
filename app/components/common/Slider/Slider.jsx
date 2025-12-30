@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { motion, useDragControls } from "framer-motion";
+import { motion } from "framer-motion";
 import React from "react";
 
 export default function Slider({
@@ -13,8 +13,6 @@ export default function Slider({
     const childrenArray = React.Children.toArray(children);
     const total = childrenArray.length;
     const [index, setIndex] = useState(0);
-
-    const controls = useDragControls();
     const containerRef = useRef(null);
 
     const next = () =>
@@ -28,52 +26,25 @@ export default function Slider({
             if (e.key === "ArrowRight") next();
             if (e.key === "ArrowLeft") prev();
         };
-
         window.addEventListener("keydown", handleKey);
         return () => window.removeEventListener("keydown", handleKey);
-    }, [loop]);
-
-    useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        const handleWheel = (e) => {
-            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-                if (e.deltaX > 0) next();
-                else prev();
-            }
-        };
-
-        container.addEventListener("wheel", handleWheel, { passive: true });
-        return () => container.removeEventListener("wheel", handleWheel);
-    }, [loop]);
+    }, [loop, total]);
 
     useEffect(() => {
         if (!autoPlay) return;
-
         const interval = setInterval(next, autoPlayInterval);
         return () => clearInterval(interval);
-    }, [autoPlay, autoPlayInterval, loop]);
-
-    const handleDragEnd = (event, info) => {
-        if (info.offset.x < -50) next();
-        else if (info.offset.x > 50) prev();
-    };
+    }, [autoPlay, autoPlayInterval, loop, total]);
 
     const hidePrev = !loop && index === 0;
     const hideNext = !loop && index === total - 1;
 
     return (
         <div ref={containerRef} className="relative w-full z-40 overflow-hidden select-none">
-
             <motion.div
                 className="flex"
                 animate={{ x: `-${index * 100}%` }}
                 transition={{ duration: 0.4 }}
-                drag="x"
-                dragControls={controls}
-                dragConstraints={{ left: 0, right: 0 }}
-                onDragEnd={handleDragEnd}
             >
                 {childrenArray.map((child, i) => (
                     <div key={i} className="w-full shrink-0 px-1 md:px-4">
@@ -114,9 +85,8 @@ export default function Slider({
                         <button
                             key={i}
                             onClick={() => setIndex(i)}
-                            className={`w-3 h-3 rounded-full transition-all ${
-                                i === index ? "bg-black scale-110" : "bg-gray-400 opacity-50"
-                            }`}
+                            className={`w-3 h-3 rounded-full transition-all ${i === index ? "bg-black scale-110" : "bg-gray-400 opacity-50"
+                                }`}
                         ></button>
                     ))}
                 </div>
