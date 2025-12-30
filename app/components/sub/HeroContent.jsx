@@ -6,7 +6,7 @@ import {
     slideInFromRight,
     slideInFromTop,
 } from "public/utils/motion";
-import { SparklesIcon } from "@heroicons/react/24/solid";
+import { Code2 } from "lucide-react";
 import Image from "next/image";
 
 const HeroContent = ({ isMobile }) => {
@@ -19,9 +19,12 @@ const HeroContent = ({ isMobile }) => {
             <div className="h-full w-full flex flex-col gap-5 justify-center m-auto text-start">
                 <motion.div
                     variants={slideInFromTop}
-                    className="Welcome-box py-[15px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
+                    className="Welcome-box gap-1 py-[15px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
                 >
-                    <SparklesIcon className="text-[#b49bff] mr-2.5 h-5 w-5 " />
+                    <Code2
+                        size={16}
+                        className="text-purple-400/90 drop-shadow-[0_0_6px_rgba(168,85,247,0.4)]"
+                    />{" "}
                     <h1 className="Welcome-text text-[10px] md:text-[13px]">
                         Software Developer Engineer Portfolio
                     </h1>
@@ -29,15 +32,15 @@ const HeroContent = ({ isMobile }) => {
 
                 <motion.div
                     variants={slideInFromLeft(0.3)}
-                    className="flex flex-col gap-6 mt-6 text-2xl md:text-6xl font-bold text-white max-w-[600px] w-auto h-auto"
+                    className="flex flex-col gap-6 mt-6 text-xl md:text-6xl font-bold text-white max-w-[800px] w-auto h-auto"
                 >
                     <span>
-                        Providing
+                        Building
                         <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-cyan-500">
                             {" "}
-                            the best{" "}
+                            impactful software{" "}
                         </span>
-                        project experience
+                        with precision and purpose.
                     </span>
                 </motion.div>
 
@@ -50,12 +53,6 @@ const HeroContent = ({ isMobile }) => {
                     life through technology. Explore my portfolio to see how I
                     can bring value to your projects.
                 </motion.p>
-                {/* <motion.a
-                    variants={slideInFromLeft(1)}
-                    className="py-2 button-primary text-center text-white cursor-pointer rounded-lg max-w-[200px]"
-                >
-                    Learn More!
-                </motion.a> */}
             </div>
             {!isMobile && (
                 <motion.div

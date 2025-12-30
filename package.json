@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.2.0",
     "@nanostores/persistent": "^1.2.0",
     "@nanostores/react": "github:nanostores/react",
+    "lucide-react": "^0.562.0",
     "nanostores": "^1.1.0",
     "next": "^16.0.7",
     "react": "19.2.0",

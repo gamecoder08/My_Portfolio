@@ -3,14 +3,14 @@ import React from 'react'
 
 const ProjectCard = ({ data, openPop }) => {
     return (
-        <div onClick={() => openPop(data)} className='relative overflow-hidden rounded-lg z-40 shadow-lg h-[400px] max-w-[500px] border border-[#2A0E61]'>
+        <div onClick={() => openPop(data)} className='relative overflow-hidden rounded-lg z-40 shadow-lg h-[400px] max-w-[500px] border border-[#2A0E61] hover:shadow-2xl hover:shadow-[#2A0E61]/40 cursor-pointer'>
             <Image
                 src={data?.imageSrc[0]}
                 alt={data?.title}
                 width={1000}
                 height={1000}
                 layout="responsive"
-                className='w-full max-h-[235px] object-contain'
+                className='w-full max-h-[235px] object-cover'
             />
 
             <div className='relative p-4'>

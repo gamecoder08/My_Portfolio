@@ -8,8 +8,22 @@ import Footer from "./components/landing/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Utkarsh Raj Sinha Portfolio",
-  description: "This is Utkarsh Raj Sinha's portfolio website to showcase his skills and projects.",
+  title: {
+    default: "Utkarsh Raj Sinha | Software Developer Engineer",
+    template: "%s | Utkarsh Raj Sinha",
+  },
+  description:
+    "Utkarsh Raj Sinha is a Software Developer Engineer specializing in React, Next.js, TypeScript, Python, and cloud technologies. Explore projects, skills, and experience.",
+  keywords: [
+    "Utkarsh Raj Sinha",
+    "Software Developer Engineer",
+    "Full Stack Developer",
+    "React Developer",
+    "Next.js Portfolio",
+    "Web Developer Portfolio",
+  ],
+  authors: [{ name: "Utkarsh Raj Sinha" }],
+  creator: "Utkarsh Raj Sinha",
 };
 
 export default async function RootLayout({ children }) {
